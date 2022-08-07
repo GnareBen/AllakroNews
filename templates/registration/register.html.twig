@@ -1,21 +1,59 @@
-{% extends 'base.html.twig' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-{% block title %}Register{% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    <title>Creer un compte</title>
+</head>
+<body>
+    <div class="container">
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+    </div>
 
-{% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Créer un compte</p>
 
-    <h1>Register</h1>
+    <div class="container col-6">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(registrationForm) }}
+            <div class="row">
+                {{ form_row(registrationForm.nom) }}
+                {{ form_row(registrationForm.prenoms) }}
+            </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+            <div class="row">
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.email) }}
+            </div>
+
+            <div class="row">
+                {{ form_row(registrationForm.sexe) }}
+                {{ form_row(registrationForm.dateNaissance) }}
+            </div>
+
+            <div class="row">
+                {{ form_row(registrationForm.plainPassword, {label: 'Password'}, {'attr': {'class': 'task_field'}}) }}
+                {{ form_row(registrationForm.plainPassword2, {label: 'Password'}, {'attr': {'class': 'task_field'}}) }}
+            </div>
+            <div class="row">
+                {{ form_row(registrationForm.agreeTerms)}}
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-lg">Créer</button>
+                </div>
+
+            </div>
+
+        {{ form_end(registrationForm) }}
+    </div>
+
+</body>
+</html>
