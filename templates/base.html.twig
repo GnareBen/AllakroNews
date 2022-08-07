@@ -14,6 +14,72 @@
         {% endblock %}
     </head>
     <body>
+
+        <header>
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{{ path("app_home") }}">
+                        <i class="fab fa-github fa-2x mx-3 ps-1"></i>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <!-- Liste nav -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path("app_home") }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Articles</a>
+                            </li>
+                        </ul>
+                        <!-- Liste nav -->
+
+                        <ul class="navbar-nav d-flex flex-row ms-auto me-3">
+
+                            {% if not app.user %}
+                                <!-- Registration or singn in -->
+                                <li class="nav-item me-auto">
+                                    <a href="{{ path("app_login") }}" class="nav-link">Connexion</a>
+                                </li>
+                                <li class="nav-item me-auto">
+                                    <a href="{{ path("app_register") }}" class="nav-link">Inscription</a>
+                                </li>
+                                <!-- Registration or singn in -->
+                            {% endif %}
+
+                            {% if app.user %}
+                                <!-- User Menu -->
+                                <li class="nav-item me-auto dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                                        <li><a class="dropdown-item" href="#">Mon compte</a></li>
+                                        <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ path("app_logout") }}">Deconnexion</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- User Menu -->
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar -->
+        </header>
+
         {% block body %}{% endblock %}
+
+        {% block footer %}{% endblock %}
     </body>
 </html>
