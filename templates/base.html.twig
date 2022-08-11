@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -15,71 +16,193 @@
     </head>
     <body>
 
-        <header>
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="{{ path("app_home") }}">
-                        <i class="fab fa-github fa-2x mx-3 ps-1"></i>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    {% block header %}
+        <nav class="navbar navbar-expand-lg bg-light fixed-top mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path("app_home") }}">Allakro News</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path("app_home") }}">Accceuil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("app_home") }}">Articles</a>
+                        </li>
 
-                        <!-- Liste nav -->
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_home") }}">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Articles</a>
-                            </li>
-                        </ul>
-                        <!-- Liste nav -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("app_home") }}">Allakro</a>
+                        </li>
 
-                        <ul class="navbar-nav d-flex flex-row ms-auto me-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("app_home") }}">UVCI</a>
+                        </li>
 
-                            {% if not app.user %}
-                                <!-- Registration or singn in -->
-                                <li class="nav-item me-auto">
-                                    <a href="{{ path("app_login") }}" class="nav-link">Connexion</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("app_home") }}">Autres</a>
+                        </li>
+                    </ul>
+
+
+                    <ul class="navabar-nav navbar-nav d-flex flex-row ms-auto me-3">
+                        <li class="nav-item">
+                            <a href="{{ path("app_login") }}" class="nav-link">
+                                <button type="button" class="btn btn-success">Se connecter</button>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ path("app_register") }}" class="nav-link">
+                                <button type="button" class="btn btn-outline-primary">Inscription</button>
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="40"
+                                     alt="" loading="lazy" />
+                                Gnaré Ben
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Mes Information</a></li>
+                                <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+                                <li>
+                                    <hr class="dropdown-divider" />
                                 </li>
-                                <li class="nav-item me-auto">
-                                    <a href="{{ path("app_register") }}" class="nav-link">Inscription</a>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path("app_login") }}">Se deconnecter</a>
                                 </li>
-                                <!-- Registration or singn in -->
-                            {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
 
-                            {% if app.user %}
-                                <!-- User Menu -->
-                                <li class="nav-item me-auto dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt="" loading="lazy" />
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
-                                        <li><a class="dropdown-item" href="#">Mon compte</a></li>
-                                        <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider" />
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ path("app_logout") }}">Deconnexion</a>
-                                        </li>
-                                    </ul>
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+        <section class="mt-4">
+            <!-- Footer -->
+            <footer class="bg-secondary text-white text-center">
+                <!-- Grid container -->
+                <div class="container p-4">
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+                        <div class="col-lg-6 col-md-12 mb-2 mb-md-0">
+                            <h5 class="text-uppercase">Footer Content</h5>
+
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                                molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                                aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                            </p>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase mb-0">Links</h5>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
                                 </li>
-                                <!-- User Menu -->
-                            {% endif %}
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
 
-                        </ul>
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                            <h5 class="text-uppercase mb-0">Links</h5>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#!" class="text-white">Link 1</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 2</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 3</a>
+                                </li>
+                                <li>
+                                    <a href="#!" class="text-white">Link 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </div>
+                <!-- Grid container -->
+
+                <div class="container p-4 pb-0">
+                    <!-- Section: Form -->
+                    <div class="row">
+                        <div class="col-12">
+                            <section class="">
+                                <form action="">
+                                    <!--Grid row-->
+                                    <div class="row d-flex justify-content-center">
+                                        <!--Grid column-->
+                                        <div class="col-auto">
+                                            <p class="pt-2">
+                                                <strong>Sign up for our newsletter</strong>
+                                            </p>
+                                        </div>
+                                        <!--Grid column-->
+
+                                        <!--Grid column-->
+                                        <div class="col-md-5 col-12">
+                                            <!-- Email input -->
+                                            <div class="form-outline mb-4">
+                                                <input type="email" id="form5Example27" class="form-control"
+                                                       placeholder="Entrez votre addresse email" />
+                                            </div>
+                                        </div>
+                                        <!--Grid column-->
+
+                                        <!--Grid column-->
+                                        <div class="col-auto">
+                                            <!-- Submit button -->
+                                            <button type="submit" class="btn btn-primary mb-4">
+                                                Subscribe
+                                            </button>
+                                        </div>
+                                        <!--Grid column-->
+                                    </div>
+                                    <!--Grid row-->
+                                </form>
+                            </section>
+                            <!-- Section: Form -->
+                        </div>
                     </div>
                 </div>
-            </nav>
-            <!-- Navbar -->
-        </header>
 
-        {% block body %}{% endblock %}
-
-        {% block footer %}{% endblock %}
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2020 Copyright:
+                    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
+        </section>
+    {% endblock %}
     </body>
 </html>

@@ -48,8 +48,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password', 'placeholder' => ' '],
-                'row_attr' => ['class' => 'form-floating col mb-3'],
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'placeholder' => ' '],
+                'row_attr' => [
+                    'class' => 'form-floating col mb-3'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
