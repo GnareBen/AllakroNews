@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,15 +20,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
@@ -37,11 +29,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, unique: true)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $sexe = null;
-
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $sexe = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -50,11 +42,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeInterface $date_naissance = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeInterface $created_at = null;
+
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenoms(): ?string
+    {
+        return $this->prenoms;
+    }
+
+    public function setPrenoms(string $prenoms): self
+    {
+        $this->prenoms = $prenoms;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -79,6 +118,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -94,6 +145,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->date_naissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $date_naissance): self
+    {
+        $this->date_naissance = $date_naissance;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -134,75 +209,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenoms(): ?string
-    {
-        return $this->prenoms;
-    }
-
-    public function setPrenoms(string $prenoms): self
-    {
-        $this->prenoms = $prenoms;
-
-        return $this;
-    }
-
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->date_naissance;
-    }
-
-    public function setDateNaissance(\DateTimeInterface $date_naissance): self
-    {
-        $this->date_naissance = $date_naissance;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getSexe(): ?string
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe(string $sexe): self
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
 }
