@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block content %}
+    <div class="container col-8 mt-4">
+
+        <div class="col-12 mb-3">
+            <h1 class="text-center">{{ article.titre }}</h1>
+        </div>
+
+        <div class="col-12">
+            <h3 class="text-center">Publie par {{ article.user }} dans la categorie categrie</h3>
+            <p class="text-center">Sous catégorie</p>
+            <p class="text-center">Mis à jour le {{ article.updatedAt ? article.updatedAt|format_datetime('full', locale='fr') : article.createdAt ? article.createdAt|format_datetime('full', locale='fr') }}</p>
+        </div>
+
+        <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="" class="img-fluid float-start me-4 mt-0 mb-2" style="height: 30rem;">
+
+        <div class="my-4">
+            {{ article.contenu | striptags }}
+        </div>
+
+        <div class="container col-8">
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" alt="" height="80" class="rounded-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ article.user }}</h5>
+                                    <h6 class="card-subtitle text-muted">Description</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col text-end">
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{ path('app_article_index') }}" class="btn btn-primary">Voir tous les articles</a>
+                        </div>
+                        <div class="col">
+                            <a href="{{ path('app_home') }}" class="btn btn-outline-success">Retourner à l'accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
