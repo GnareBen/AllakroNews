@@ -10,7 +10,7 @@
 
             <div class="row  d-flex">
                 <div class="col">
-                    <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="" style="height: 25rem;" class="w-100">
+                    <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('post') }}" alt="" style="height: 25rem;" class="w-100">
                 </div>
 
                 <div class="col">
@@ -47,7 +47,7 @@
                                     <div class="card mb-3">
                                         <div class="row g-0">
                                             <div class="col-md-4">
-                                                <img src="{{ vich_uploader_asset(article, 'imageFile') }}" class="img-fluid rounded-start h-100" alt="...">
+                                                <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('card_thumb') }}" class="img-fluid rounded-start w-100 h-100" alt="...">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
@@ -86,7 +86,7 @@
                                     <div class="card mb-3">
                                         <div class="row g-0">
                                             <div class="col-md-4">
-                                                <img src="{{ vich_uploader_asset(article, 'imageFile') }}" class="img-fluid rounded-start h-100" alt="...">
+                                                <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('card_thumb') }}" class="img-fluid rounded-start h-100 w-100" alt="...">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
@@ -97,7 +97,10 @@
                                                             <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary">Lire Plus</a>
                                                         </div>
                                                         <div class="col-8">
-                                                            <p class="card-text"><small class="text-muted">Mis à jour le {{ article.updatedAt ? article.updatedAt|format_datetime('full', locale='fr') : article.createdAt ? article.createdAt|format_datetime('full', locale='fr') }}</small></p>
+                                                            <p class="card-text">
+                                                                <small class="text-muted">Mis à jour le {{ article.updatedAt ? article.updatedAt|format_datetime('full', locale='fr') : article.createdAt ? article.createdAt|format_datetime('full', locale='fr') }}
+                                                                </small>
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
