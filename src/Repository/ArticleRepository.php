@@ -52,6 +52,19 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findLastOne(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
     public function findLastUVCI(String $name): array
     {
         return $this->createQueryBuilder('a')
@@ -64,15 +77,21 @@ class ArticleRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findLastOne(): array
-    {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.id', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
+//        /**
+//     * @return Article[] Returns an array of User objects
+//     */
+//    public function findByName($value): array
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.Titre = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('u.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
 
 //    public function findOneBySomeField($value): ?Article
 //    {
