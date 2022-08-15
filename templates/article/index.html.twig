@@ -44,6 +44,11 @@
                     {% endfor %}
                 </div>
 
+                <div class="d-flex">
+                    {% do articles.setPageRange(5) %}
+                    {{ knp_pagination_render(articles, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+                </div>
+
                 <div class="col-4">
                     {% include 'article/partial/_side.html.twig' %}
                 </div>
