@@ -14,46 +14,71 @@
     <title>Creer un compte</title>
 </head>
 <body>
-    <div class="container">
-        {% for flash_error in app.flashes('verify_email_error') %}
-            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-        {% endfor %}
-    </div>
 
-    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Créer un compte</p>
+<div class="vh-100">
 
-    <div class="container col-6">
+        <div class="row">
 
-        {{ form_start(registrationForm) }}
-            <div class="row">
-                {{ form_row(registrationForm.nom) }}
-                {{ form_row(registrationForm.prenoms) }}
+            <div class="col-6 ">
+
+            <div class="m-4 d-flex">
+                    <img src="{{ asset("Images/App/Logo/logo.jpg") }}" alt="" class="rounded-circle d-inline-block align-text-center" width="60" height="54">
+                    <h1 class="fw-bold">Allakro News</h1>
             </div>
 
-            <div class="row">
-                {{ form_row(registrationForm.username) }}
-                {{ form_row(registrationForm.email) }}
-            </div>
+                <div class="container mx-3">
+                    <p class="text-center h1 fw-bold">Créer un compte</p>
+                    {{ form_start(registrationForm) }}
+                    <div class="row">
+                        {{ form_row(registrationForm.nom) }}
+                        {{ form_row(registrationForm.prenoms) }}
+                    </div>
 
-            <div class="row">
-                {{ form_row(registrationForm.sexe) }}
-                {{ form_row(registrationForm.dateNaissance) }}
-            </div>
+                    <div class="row g-2">
+                        {{ form_row(registrationForm.username) }}
+                        {{ form_row(registrationForm.email) }}
+                    </div>
 
-            <div class="row">
-                {{ form_row(registrationForm.plainPassword, {label: 'Password'}, {'attr': {'class': 'task_field'}}) }}
-                {{ form_row(registrationForm.plainPassword2, {label: 'Password'}, {'attr': {'class': 'task_field'}}) }}
-            </div>
-            <div class="row">
-                {{ form_row(registrationForm.agreeTerms)}}
-                <div class="col">
-                    <button type="submit" class="btn btn-primary btn-lg">Créer</button>
+                    <div class="row g-2">
+                        {{ form_row(registrationForm.sexe) }}
+                        {{ form_row(registrationForm.dateNaissance, {label: 'Date de naissance' }) }}
+                    </div>
+
+                    <div class="row g-2">
+                        {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
+                        {{ form_row(registrationForm.plainPassword2, {label: 'Mot de passe'}) }}
+                    </div>
+                    <div class="row">
+                        {{ form_row(registrationForm.agreeTerms)}}
+                    </div>
+
+                    <div class="row d-flex align-items-center">
+                        <div class="col">
+                            <button type="submit" class="btn btn-sm btn-primary btn-lg">Inscription</button>
+                        </div>
+                        <div class="col">
+                            <p><small>Vous avez déja un compte ? <a href="{{ path('app_register') }}">Connectez-vous</a></small></p>
+                        </div>
+                    </div>
+
+                    {{ form_end(registrationForm) }}
+                </div>
+
+                <div class="text-center m-5">
+                    © {{ 'now' | date('Y')}} Village d'Allakro
                 </div>
 
             </div>
 
-        {{ form_end(registrationForm) }}
-    </div>
+            <div class="col-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp" class="w-100 vh-100" alt="login form" />
+            </div>
+
+        </div>
+
+</div>
+
+
 
 </body>
 </html>

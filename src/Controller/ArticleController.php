@@ -3,13 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Commentaire;
 use App\Form\ArticleType;
+use App\Form\CommentaireType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentaireRepository;
+use App\Service\CommentaireService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -32,8 +37,8 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $articleRepository->add($article, true);
 
+            $articleRepository->add($article, true);
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -43,11 +48,26 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/{slug}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    #[Route('/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
+    public function show(Article $article,  Request $request, CommentaireService $commentaire, CommentaireRepository $commentaireRepository , Security $security): Response
     {
+        $comment = new Commentaire();
+
+        $form = $this->createForm(CommentaireType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $commentaire->persistCommentaire($comment, $article, $commentaireRepository, $security);
+
+            $this->redirectToRoute('app_article_show', [
+                'id' => $article->getId()
+            ]);
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'form' => $form->createView()
         ]);
     }
 
@@ -69,7 +89,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_article_delete', methods: ['POST', 'POST'])]
     public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
