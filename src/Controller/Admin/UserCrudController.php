@@ -8,11 +8,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
@@ -29,29 +30,26 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm()->hideOnDetail()->hideOnIndex(),
-            TextField::new('nom')->onlyOnIndex(),
-            TextField::new('prenoms')->onlyOnIndex(),
-            TextField::new('username')->onlyOnIndex(),
-            EmailField::new('email')->onlyOnIndex(),
-            TextField::new('password')
-                ->hideOnForm()
-                ->hideOnDetail()
-                ->hideOnIndex(),
-            DateTimeField::new('date_naissance')
-                ->hideOnForm()
-                ->hideOnDetail()
-                ->hideOnIndex(),
-            DateTimeField::new('created_at')
-                ->hideOnForm()
-                ->hideOnDetail()
-                ->hideOnIndex(),
+            TextField::new('nom')->hideOnIndex(),
+            TextField::new('prenoms')->hideOnIndex(),
+            TextField::new('username'),
+            EmailField::new('email'),
+            ChoiceField::new('roles')
+                ->setChoices([
+                    'ROLE_SUPER_ADMIN'=>'ROLE_SUPER_ADMIN',
+                    'ROLE_ADMIN'=>'ROLE_ADMIN',
+                    'ROLE_USER'=>'ROLE_USER'
+                ])
+                ->renderExpanded()
+                ->allowMultipleChoices(),
+            TextField::new('password')->hideOnIndex()->hideOnDetail(),
             BooleanField::new('isVerified')->onlyOnIndex(),
         ];
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        return parent::configureActions($actions)
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::EDIT)
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
@@ -64,13 +62,6 @@ class UserCrudController extends AbstractCrudController
             ;
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-            ->showEntityActionsInlined()
-            ;
-    }
-
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
@@ -78,6 +69,14 @@ class UserCrudController extends AbstractCrudController
             ->add(TextFilter::new('prenoms'))
             ->add(TextFilter::new('username'))
             ->add(DateTimeFilter::new('created_at'))
-            ->add(BooleanFilter::new('isVerified'));
+            ->add(BooleanFilter::new('isVerified'))
+            ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+            ;
     }
 }

@@ -58,7 +58,7 @@ class Article
     #[ORM\Column]
     private ?bool $is_published = false;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class, orphanRemoval:true)]
     private Collection $commentaires;
 
     public function __construct()
