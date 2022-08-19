@@ -65,17 +65,17 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * @return Article[] Returns an array size3 of Article objects
      */
-    public function findByTag(String $name): array
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.tag = :name')
-            ->setParameter('name', $name)
-            ->orderBy('a.tag', 'DESC')
-            ->setMaxResults(3)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
+//    public function findByTag(String $name): array
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->andWhere('a.tag = :name')
+//            ->setParameter('name', $name)
+//            ->orderBy('a.tag', 'DESC')
+//            ->setMaxResults(3)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
 
 //        /**
 //     * @return Article[] Returns an array of User objects
