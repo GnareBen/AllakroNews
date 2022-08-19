@@ -14,8 +14,9 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig', [
             'articles0' =>$articleRepository->findLastOne(),
-            'articles' => $articleRepository->findByLast("UVCI"),
-            'articles2' => $articleRepository->findLastUVCI("UVCI"),
+            'articles1' => $articleRepository->findBySix(),
+            'articles2' => $articleRepository->findByTag("UVCI"),
+            'articles3' => $articleRepository->findByTag("ALLAKRO")
         ]);
     }
 }

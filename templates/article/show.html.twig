@@ -3,58 +3,97 @@
 {% block title %}Article{% endblock %}
 
 {% block content %}
+
+    {#    bloc d'affiche de l'article#}
     <div class="container col-8 mt-4">
+
         <div class="col-12 mb-3">
-            <h1 class="text-center">{{ article.titre }}</h1>
+            <h1 class="text-center fw-bold text-uppercase">{{ article.titre }}</h1>
         </div>
+
         <div class="col-12">
             <h3 class="text-center">Publie par {{ article.user }} dans la categorie categrie</h3>
             <p class="text-center">Sous catégorie</p>
-            <p class="text-center">Mis à jour le {{ article.updatedAt ? article.updatedAt|format_datetime('full', locale='fr') : article.createdAt ? article.createdAt|format_datetime('full', locale='fr') }}</p>
+            <p class="text-center lead">Mis à jour le {{ article.updatedAt ? article.updatedAt|format_datetime('full', locale='fr') : article.createdAt ? article.createdAt|format_datetime('full', locale='fr') }}</p>
         </div>
+
         <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="" class="img-fluid float-start me-4 mt-0 mb-2" style="height: 30rem;">
+
         <div class="my-4">
             {{ article.contenu | striptags }}
         </div>
-        <div class="container col-8">
-            <div class="row align-items-center">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" alt="" height="80" class="rounded-circle">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ article.user }}</h5>
-                                    <h6 class="card-subtitle text-muted">Description</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-8 text-end">
-                    <div class="row">
 
-                        <div class="col">
-                            <a href="{{ path('app_article_index') }}" class="btn btn-primary">Voir tous les articles</a>
-                        </div>
+    </div>
+    {#    bloc d'affiche de l'article#}
 
-                        <div class="col">
-                            <a href="{{ path('app_home') }}" class="btn btn-outline-success">Retourner à l'accueil</a>
-                        </div>
+    {#    affichage de l'auteur de l'artiche#}
+    <div class="container mb-4">
 
-                    </div>
-                </div>
+        <div class="bg bg-light p-3 m-4 d-flex flex-row col-6" >
+
+            <div class="me-3">
+                <img src="{{ asset('Images/App/Avatars/man.png')}}" alt="" width="130">
             </div>
-        </div>
 
-        <div class="">
-            {{ form_start(form) }}
-                <input type="submit" value="Envoyer">
-            {{ form_end(form) }}
+            <div class="d-flex flex-column">
+                <p> Edité par{{ article.user}}</p>
+                <p class="fw-bold">description description description description description description description description description description description </p>
+            </div>
 
         </div>
 
     </div>
+    {#   fin  affichage de l'auteur de l'artiche#}
+
+    {#    bloc d'affiche de commentaire#}
+    <div class="container">
+
+        <h3 class="fw-bold">Liste des commentaires</h3>
+
+        {% for commentaire in article.commentaires %}
+
+                <div class="bg bg-light p-3 m-4 d-flex flex-row col-8 " >
+
+                        <div class="d-inline-flex flex-column">
+                            <p> Edité par{{ commentaire.user }}</p>
+                            <p class="fw-bold">{{ commentaire.contenu }}</p>
+                            <p class="align-self-end"><small>{{ commentaire.createdAt | format_datetime('full', locale='fr')}}</small></p>
+                        </div>
+
+                </div>
+
+        {% endfor %}
+
+    </div>
+    {#    find du block des commentaire#}
+
+    {#    affichage du formulaire de commentaire#}
+    {%if app.user %}
+        <div class="container">
+            {{ form_start(form) }}
+            {{ form_row(form) }}
+            <input type="submit" class="btn btn-primary" value="Envoyer">
+            {{ form_end(form) }}
+        </div>
+    {% else %}
+        <div class="container">
+            <p>Veuillez <a href="">vous connecter </a> pour laisser un commentaire ou  <a href="">vous inscrire gratuitement</a></p>
+        </div>
+    {%endif %}
+    {#   fin affichage du formulaire de commentaire#}
+
+    <div class="container">
+        <div class="d-flex flex-row justify-content-center">
+
+            <div class="mx-3">
+                <a href="" class="btn btn-primary">Article suivant</a>
+            </div>
+
+            <div class="mx-3">
+                <a href="" class="btn btn-primary">Retourner à l'accueil</a>
+            </div>
+
+        </div>
+    </div>
+
 {% endblock %}

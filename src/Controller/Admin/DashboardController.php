@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Commentaire;
+use App\Entity\Tag;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -63,5 +64,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section(' ', );
         yield MenuItem::subMenu("Commentaires", "fas fa-comment")->setSubItems([
             MenuItem::linkToCrud('Tous', 'fas fa-comments', Commentaire::class)]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Tags", "fas fa-tag")->setSubItems([
+            MenuItem::linkToCrud('Tous les tags', 'fas fa-tags', Tag::class),
+            MenuItem::linkToCrud('Ajouter', 'fas fa-tags', Tag::class)->setAction('new')
+        ]);
     }
 }

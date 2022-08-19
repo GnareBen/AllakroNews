@@ -40,9 +40,9 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Article[] Returns an array of Article objects
+     * @return Article[] Returns an array size 6 of Article objects
      */
-    public function findByLast(): array
+    public function findBySix(): array
     {
         return $this->createQueryBuilder('a')
             ->orderBy('a.id', 'DESC')
@@ -63,14 +63,14 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Article[] Returns an array of Article objects
+     * @return Article[] Returns an array size3 of Article objects
      */
-    public function findLastUVCI(String $name): array
+    public function findByTag(String $name): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.Titre = :name')
+            ->andWhere('a.tag = :name')
             ->setParameter('name', $name)
-            ->orderBy('a.id', 'DESC')
+            ->orderBy('a.tag', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult()

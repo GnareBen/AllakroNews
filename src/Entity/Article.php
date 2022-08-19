@@ -61,9 +61,13 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Commentaire::class, orphanRemoval:true)]
     private Collection $commentaires;
 
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
+    private Collection $tag;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->tag = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +227,30 @@ class Article
                 $commentaire->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
+    {
+        return $this->tag;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tag->contains($tag)) {
+            $this->tag->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tag->removeElement($tag);
 
         return $this;
     }

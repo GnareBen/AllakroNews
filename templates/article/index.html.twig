@@ -5,55 +5,54 @@
 
 {% block content %}
         <div class="container">
-
+            {#    bloc d'affiche de commentaire#}
             <div class="row">
 
+                {#    bloc d'affiche de tout les article dans un card#}
                 <div class="col-8">
-
-                    <h1 class="mt-4 text-center">Tous les articles</h1>
+                    <h1 class="m-5 text-start">Tous les articles</h1>
 
                     {% for article in articles %}
                     <div class="card mb-3">
-
                         <div class="row g-0">
 
                             <div class="col-md-4">
-                                <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('card_thumb') }}" class="img-fluid rounded-start h-100" alt="...">
+                                <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('card_thumb') }}" class="img-fluid rounded-start h-100" width="400" alt="...">
                             </div>
 
                             <div class="col-md-8">
-
-                                <div class="card-body">
+                                <div class="card-body pb-1 pt-1">
                                     <h5 class="card-title">{{ article.titre }}</h5>
-                                    <p class="card-text">{{ article.contenu | striptags | u.truncate(200, '...', false) }}</p>
+                                    <h6 class="card-subtitle text-muted">{{ article.user }}</h6>
+                                    <p class="card-text mt-3">{{ article.contenu | striptags | u.truncate(200, '...', false) }}</p>
                                     <div class="row align-items-end">
                                         <div class="col-4">
                                             <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary">Lire Plus</a>
                                         </div>
-                                        <div class="col-8">
-                                            <p class="card-text"><small class="text-muted">Mis à jour le {{ article.updatedAt ? article.updatedAt|format_datetime('full', locale='fr') : article.createdAt ? article.createdAt|format_datetime('full', locale='fr') }}</small></p>
+                                        <div class="col-8 d-flex">
+                                            <p class="card-text ms-auto"><small class="text-muted">Ajouté le {{ article.updatedAt | format_datetime('full', locale='fr') }}</small></p>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                     {% endfor %}
                 </div>
+                {#    bloc d'affiche de tout les article dans un card#}
 
+                {#    bloc d'affiche de commentaire#}
                 <div class="d-flex">
                     {% do articles.setPageRange(5) %}
                     {{ knp_pagination_render(articles, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
                 </div>
+                {#    bloc d'affiche de commentaire#}
 
+                {#    bloc d'affiche de commentaire#}
                 <div class="col-4">
                     {% include 'article/partial/_side.html.twig' %}
                 </div>
-
+                {#    bloc d'affiche de commentaire#}
             </div>
-
         </div>
 {% endblock %}

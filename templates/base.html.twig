@@ -16,6 +16,7 @@
     </head>
     <body>
 
+    {#    bloc d'affiche de navbar#}
     {% block navbar %}
         <nav class="navbar navbar-expand-lg bg-light sticky-top mb-0">
             <div class="container-fluid">
@@ -86,7 +87,9 @@
             </div>
         </nav>
     {% endblock %}
+    {#    bloc d'affiche de navbar#}
 
+    {#    bloc d'affiche de carousel#}
     {% block carousel %}
         <header class="mt-0">
             <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -138,9 +141,13 @@
             </div>
         </header>
     {% endblock %}
+    {#    bloc d'affiche de carousel#}
 
+    {#    bloc d'affiche de content#}
     {% block content %}{% endblock %}
+    {#    bloc d'affiche de content#}
 
+    {#    bloc d'affiche de footer#}
     {% block footer %}
         <section class="mt-4">
             <footer class="bg-secondary text-white text-center">
@@ -246,5 +253,6 @@
 
         </section>
     {% endblock %}
+    {#    bloc d'affiche de footer#}
     </body>
 </html>
