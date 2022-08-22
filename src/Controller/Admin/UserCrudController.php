@@ -12,12 +12,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -29,12 +34,48 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm()->hideOnDetail()->hideOnIndex(),
-            TextField::new('nom')->hideOnIndex(),
-            TextField::new('prenoms')->hideOnIndex(),
+            IdField::new('id')
+                ->hideOnForm()
+                ->hideOnDetail()
+                ->hideOnIndex(),
+
+            TextField::new('nom')
+                ->hideOnIndex(),
+
+            TextField::new('prenoms')
+                ->hideOnIndex(),
+
             TextField::new('username'),
+
             EmailField::new('email'),
+
+            NumberField::new('number'),
+
+            ChoiceField::new('sexe')
+                ->hideOnIndex()
+                ->setChoices([
+                    'Homme'=>'Homme',
+                    'Femme'=>'Femme',
+                ]),
+
+            DateField::new('date_naissance'),
+
+            TextareaField::new('description')
+                ->hideOnIndex(),
+
+            TextField::new('imageFile')
+                ->hideOnIndex()
+                ->hideOnDetail()
+                ->setFormType(VichImageType::class),
+
+            ImageField::new('image')
+                ->hideOnForm()
+                ->setBasePath('/uploads/images/users')
+                ->setUploadDir('/public/uploads/images/users'),
+
+
             ChoiceField::new('roles')
+                ->hideOnIndex()
                 ->setChoices([
                     'ROLE_SUPER_ADMIN'=>'ROLE_SUPER_ADMIN',
                     'ROLE_ADMIN'=>'ROLE_ADMIN',
@@ -42,8 +83,13 @@ class UserCrudController extends AbstractCrudController
                 ])
                 ->renderExpanded()
                 ->allowMultipleChoices(),
-            TextField::new('password')->hideOnIndex()->hideOnDetail(),
-            BooleanField::new('isVerified')->onlyOnIndex(),
+
+
+            TextField::new('password')
+                ->onlyWhenCreating(),
+
+            BooleanField::new('isVerified')
+                ->onlyOnIndex(),
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\Commentaire;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -69,6 +70,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu("Tags", "fas fa-tag")->setSubItems([
             MenuItem::linkToCrud('Tous les tags', 'fas fa-tags', Tag::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-tags', Tag::class)->setAction('new')
+        ]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Catégorie", "fa-solid fa-pencil")->setSubItems([
+            MenuItem::linkToCrud('Toutes les catégories', 'fa-solid fa-pen-field', Category::class),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-pen-to-square', Category::class)->setAction('new')
         ]);
     }
 }

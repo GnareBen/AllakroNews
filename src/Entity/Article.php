@@ -64,6 +64,9 @@ class Article
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
     private Collection $tag;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -251,6 +254,18 @@ class Article
     public function removeTag(Tag $tag): self
     {
         $this->tag->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

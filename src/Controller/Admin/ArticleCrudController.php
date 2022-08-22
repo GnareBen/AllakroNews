@@ -39,12 +39,16 @@ class ArticleCrudController extends AbstractCrudController
                 ->setColumns(6)
                 ->hideOnIndex(),
 
+            AssociationField::new('category', 'Catégorie')
+                ->setColumns(6),
+
             AssociationField::new('tag', 'Tag')
-                ->autocomplete(),
+                ->autocomplete()
+                ->setColumns(6),
 
             TextField::new('imageFile', 'Image')
                 ->setFormType(VichImageType::class)
-                ->onlyWhenCreating(),
+                ->hideOnIndex(),
 
             ImageField::new('image', 'Image')
                 ->setBasePath('/uploads/images/articles')

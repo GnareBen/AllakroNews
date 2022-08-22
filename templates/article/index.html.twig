@@ -30,7 +30,7 @@
                                             <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary">Lire Plus</a>
                                         </div>
                                         <div class="col-8 d-flex">
-                                            <p class="card-text ms-auto"><small class="text-muted">Ajouté le {{ article.updatedAt | format_datetime('full', locale='fr') }}</small></p>
+                                            <p class="card-text ms-auto"><small class="text-muted">Ajouté le {{ article.createdAt | date('d-m-Y') }} dans la catégorie {{ article.category }}</small></p>
                                         </div>
                                     </div>
                                 </div>

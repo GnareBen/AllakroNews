@@ -37,11 +37,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_home") }}">Allakro</a>
+                                <a class="nav-link" href="{{ path("app_home") }}">Trouver un service</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_home") }}">UVCI</a>
+                                <a class="nav-link" href="{{ path("app_home") }}">Informations utiles</a>
                             </li>
 
                             <li class="nav-item">
@@ -67,12 +67,12 @@
                         {% if app.user %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('Images/App/Avatars/man.png') | imagine_filter('user_profile') }}" class="rounded-circle" height="40" alt="" loading="lazy" />
+                                <img src="{{ vich_uploader_asset(app.user, 'imageFile') | imagine_filter('user_profile') }}" class="rounded-circle" height="40" alt="" loading="lazy" />
                                 {{ app.user.username }}
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Mes Information</a></li>
-                                <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+                                <li><a class="dropdown-item" href="#">Mes annonces</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>
@@ -149,109 +149,106 @@
 
     {#    bloc d'affiche de footer#}
     {% block footer %}
-        <section class="mt-4">
-            <footer class="bg-secondary text-white text-center">
+        <footer class="bg-secondary text-white text-center">
 
-                <div class="container p-4">
+            <div class="container p-4">
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-lg-6 col-md-12 mb-2 mb-md-0">
-                            <h5 class="text-uppercase">Footer Content</h5>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!</p>
-                        </div>
+                    <div class="col-lg-6 col-md-12 mb-2 mb-md-0">
+                        <h5 class="text-uppercase">Footer Content</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!</p>
+                    </div>
 
-                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 class="text-uppercase mb-0">ALAKRO</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!" class="text-white">Link 1</a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="text-white">Link 2</a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="text-white">Link 3</a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="text-white">Link 4</a>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-0">ALAKRO</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!" class="text-white">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 4</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                            <h5 class="text-uppercase mb-0">UVCI</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!" class="text-white">Link 1</a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="text-white">Link 2</a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="text-white">Link 3</a>
-                                </li>
-                                <li>
-                                    <a href="#!" class="text-white">Link 4</a>
-                                </li>
-                            </ul>
-                        </div>
-
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-0">UVCI</h5>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!" class="text-white">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 4</a>
+                            </li>
+                        </ul>
                     </div>
 
                 </div>
 
-                <div class="container p-4 pb-0">
+            </div>
 
-                    <div class="row">
+            <div class="container p-4 pb-0">
 
-                        <div class="col-12">
+                <div class="row">
 
-                            <section class="">
+                    <div class="col-12">
 
-                                <form action="">
+                        <section class="">
 
-                                    <div class="row d-flex justify-content-center">
+                            <form action="">
 
-                                        <div class="col-auto">
-                                            <p class="pt-2">
-                                                <strong>Sign up for our newsletter</strong>
-                                            </p>
-                                        </div>
+                                <div class="row d-flex justify-content-center">
 
-                                        <div class="col-md-5 col-12">
-                                            <div class="form">
-                                                <div class="form-outline mb-4">
-                                                    <input type="email" id="form5Example27" class="form-control" placeholder="Entrez votre addresse email" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn btn-primary mb-4">
-                                                Subscribe
-                                            </button>
-                                        </div>
-
+                                    <div class="col-auto">
+                                        <p class="pt-2">
+                                            <strong>Sign up for our newsletter</strong>
+                                        </p>
                                     </div>
 
-                                </form>
+                                    <div class="col-md-5 col-12">
+                                        <div class="form">
+                                            <div class="form-outline mb-4">
+                                                <input type="email" id="form5Example27" class="form-control" placeholder="Entrez votre addresse email" />
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            </section>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-4">
+                                            Subscribe
+                                        </button>
+                                    </div>
 
-                        </div>
+                                </div>
+
+                            </form>
+
+                        </section>
 
                     </div>
 
                 </div>
 
-                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                    © {{ 'now' | date('Y')}} Copyright: Village d'Allakro
-                </div>
+            </div>
 
-            </footer>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © {{ 'now' | date('Y')}} Copyright: Village d'Allakro
+            </div>
 
-        </section>
+        </footer>
     {% endblock %}
     {#    bloc d'affiche de footer#}
     </body>

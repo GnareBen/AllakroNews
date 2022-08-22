@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,32 +62,19 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'row_attr' => ['class' => 'col-md-6  mb-3'],
             ])
+            ->add('number', NumberType::class, [
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Votre numero'],
+                'row_attr' => [
+                    'class' => 'col-md-6 mb-3'],
+            ])
             ->add('plainPassword', PasswordType::class, [
                 'required' => true,
                 'mapped' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
-                    'placeholder' => 'Nouveau mot de passe'],
-                'row_attr' => [
-                    'class' => 'col-md-6 mb-3'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrez un mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
-            ->add('plainPassword2', PasswordType::class, [
-                'required' => true,
-                'mapped' => false,
-                'attr' => [
-                    'autocomplete' => 'new-password',
-                    'placeholder' => 'Répétez votre mot de passe'
+                    'placeholder' => ' Entrez un mot de passe'
                 ],
                 'row_attr' => [
                     'class' => 'col-md-6 mb-3'
