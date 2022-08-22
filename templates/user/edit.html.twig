@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    <title>Profile</title>
+</head>
+<body>
+
+    <section style="background-color: #eee;" class="d-flex vh-100">
+
+        <div class="container mt-2 d-flex flex-column justify-content-center align-items-center">
+
+            <div class="card mb-1 col-4 mb-3">
+                <div class="card-body text-center">
+                    <img src="{{ asset('uploads/images/users/' ~ user.image) }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                    <h5 class="my-3">{{ user.nom }} {{ user.prenoms }}</h5>
+                </div>
+            </div>
+
+            <div class="container col-8">
+
+                {{ form_start(form) }}
+                <div class="row">
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.prenoms) }}
+                    {{ form_row(form.username) }}
+                </div>
+
+                <div class="row">
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.sexe) }}
+                    {{ form_row(form.number) }}
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    {{ form_row(form.dateNaissance) }}
+                    {{ form_row(form.imageName) }}
+                </div>
+
+                <div class="row">
+                    {{ form_row(form.description) }}
+                </div>
+                <div class="">
+                    <button class="btn btn-primary" type="submit">Modifier</button>
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+
+    </section>
+
+</body>
+</html>
+
