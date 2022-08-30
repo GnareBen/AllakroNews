@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Annonce;
 use App\Entity\Article;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
@@ -27,28 +28,33 @@ class EasyAdminSubscriber implements \Symfony\Component\EventDispatcher\EventSub
         ];
     }
 
+
     public function setArticleDate(BeforeEntityPersistedEvent $event)
     {
         $user = $this->security->getUser();
 
         $entity = $event->getEntityInstance();
-        if (!($entity instanceof Article)){
-            return;
+
+        if ($entity instanceof Article){
+            $entity
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUser($user);
         }
 
-        $entity->setCreatedAt(new \DateTimeImmutable())
-            ->setUser($user);
+        if ($entity instanceof Annonce){
+            $entity->setCreatedAt(new \DateTimeImmutable())
+                ->setUser($user);
+        }
     }
 
     public function setArticleUpdate(BeforeEntityUpdatedEvent $event)
     {
         $entity = $event->getEntityInstance();
-        if (!($entity instanceof Article)){
-            return;
-        }
 
-        $user =$this->security->getUser();
-        $entity->setUpdatedAt(new \DateTimeImmutable())
-            ->setUser($user);
+        if ($entity instanceof Article){
+            $user =$this->security->getUser();
+            $entity->setUpdatedAt(new \DateTimeImmutable())
+                ->setUser($user);
+        }
     }
 }

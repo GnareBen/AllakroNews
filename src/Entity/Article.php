@@ -50,6 +50,7 @@ class Article
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\Column(nullable: true)]
+    #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updated_at = null;
 
     #[ORM\Column]

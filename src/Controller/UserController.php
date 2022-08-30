@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Gedmo\Sluggable\Util\Urlizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/user')]
+#[Route('/profile')]
 class UserController extends AbstractController
 {
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
@@ -28,8 +29,6 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository, SluggerInterface $slugger): Response
     {
-
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -40,6 +39,7 @@ class UserController extends AbstractController
             $destination = $this->getParameter('kernel.project_dir').'/public/uploads/images/users';
 
             if ($imageFile) {
+
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
 
                 $safeFilename = $slugger->slug($originalFilename);
@@ -53,12 +53,10 @@ class UserController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-
                 $user->setImage($newFilename);
             }
 
             $userRepository->add($user, true);
-
             return $this->redirectToRoute('app_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 

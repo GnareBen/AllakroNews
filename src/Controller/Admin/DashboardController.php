@@ -2,9 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Annonce;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Commentaire;
+use App\Entity\Contact;
+use App\Entity\Dispensaire;
+use App\Entity\Pharmacie;
+use App\Entity\Quartier;
 use App\Entity\Tag;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -54,6 +59,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Liste', 'fa fa-file-text', Article::class),
             MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Commentaire::class),
             MenuItem::linkToCrud('Publier', 'fa fa-edit', Article::class)->setAction('new'),
+
         ]);
 
         yield MenuItem::section(' ', );
@@ -69,13 +75,42 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section(' ', );
         yield MenuItem::subMenu("Tags", "fas fa-tag")->setSubItems([
             MenuItem::linkToCrud('Tous les tags', 'fas fa-tags', Tag::class),
-            MenuItem::linkToCrud('Ajouter', 'fas fa-tags', Tag::class)->setAction('new')
+            MenuItem::linkToCrud('Ajouter', 'fas fa-pen-to-square', Tag::class)->setAction('new')
         ]);
 
         yield MenuItem::section(' ', );
         yield MenuItem::subMenu("Catégorie", "fa-solid fa-pencil")->setSubItems([
             MenuItem::linkToCrud('Toutes les catégories', 'fa-solid fa-pen-field', Category::class),
             MenuItem::linkToCrud('Ajouter', 'fa-solid fa-pen-to-square', Category::class)->setAction('new')
+        ]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Messages", "fa-solid fa-message")->setSubItems([
+            MenuItem::linkToCrud('Tous les messages', 'fa-solid fa-message-text', Contact::class),
+        ]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Annonces", "fa-solid fa-microphone")->setSubItems([
+            MenuItem::linkToCrud('Toutes les annonces', 'fa-solid fa-microphone-lines', Annonce::class),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-pen-to-square', Annonce::class)->setAction('new')
+        ]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Dispensaire", "fa-solid fa-user-doctor")->setSubItems([
+            MenuItem::linkToCrud('Tous les dispensaire', 'fa-solid fa-user-nurse', Dispensaire::class),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-pen-to-square', Dispensaire::class)->setAction('new')
+        ]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Pharmacies", "fa-solid fa-house-medical")->setSubItems([
+            MenuItem::linkToCrud('Toutes les pharmacies', 'fa-solid fa-kit-medical', Pharmacie::class),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-pen-to-square', Pharmacie::class)->setAction('new')
+        ]);
+
+        yield MenuItem::section(' ', );
+        yield MenuItem::subMenu("Quartier", "fa-solid fa-city")->setSubItems([
+            MenuItem::linkToCrud('Tous les quartiers', 'fa-solid fa-tree-city', Quartier::class),
+            MenuItem::linkToCrud('Ajouter', 'fa-solid fa-pen-to-square', Quartier::class)->setAction('new')
         ]);
     }
 }

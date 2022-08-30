@@ -6,6 +6,9 @@
 parameters:
     app.article_image: /uploads/images/articles
     app.user_image: /uploads/images/users
+    app.annonce_image: /uploads/images/annonces
+    app.dispensaire_image: /uploads/images/dispensaires
+    app.pharmacie_image: /uploads/images/pharmacies
 
 services:
     # default configuration for services in *this* file

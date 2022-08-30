@@ -9,3 +9,15 @@ vich_uploader:
         users_image:
             uri_prefix: '%app.user_image%'
             upload_destination: '%kernel.project_dir%/public%app.user_image%'
+
+        annonces_image:
+            uri_prefix: '%app.annonce_image%'
+            upload_destination: '%kernel.project_dir%/public%app.annonce_image%'
+
+        dispensaires_image:
+            uri_prefix: '%app.dispensaire_image%'
+            upload_destination: '%kernel.project_dir%/public%app.dispensaire_image%'
+
+        pharmacies_image:
+            uri_prefix: '%app.pharmacie_image%'
+            upload_destination: '%kernel.project_dir%/public%app.pharmacie_image%'
