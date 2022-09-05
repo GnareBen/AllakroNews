@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    <title>Réinitialiser mot de passe</title>
+</head>
+<body>
+
+{% for flash_error in app.flashes('reset_password_error') %}
+    <div class="alert alert-danger container col-12" role="alert">{{ flash_error }}</div>
+{% endfor %}
+<h1 class="text-center mt-5 mb-5">Demande réinitialisation mon mot de passe</h1>
+
+<div class="d-flex justify-content-center align-items-center h-100">
+    {{ form_start(requestForm) }}
+    {{ form_row(requestForm.email) }}
+    <div class="mb-4">
+        <small>Entrez votre adresse email et vous recevrez un email de réinitialisation.</small>
+    </div>
+
+    <button class="btn btn-primary">Envoyer un email de réinitialisation</button>
+    {{ form_end(requestForm) }}
+
+</div>
+
+</body>
+</html>
