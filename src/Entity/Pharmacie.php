@@ -23,7 +23,7 @@ class Pharmacie
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
     /**
@@ -41,6 +41,9 @@ class Pharmacie
     #[ORM\Column(nullable: true)]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $contact = null;
 
     public function getId(): ?int
     {
@@ -82,7 +85,7 @@ class Pharmacie
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -121,6 +124,18 @@ class Pharmacie
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getContact(): ?string
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?string $contact): self
+    {
+        $this->contact = $contact;
 
         return $this;
     }

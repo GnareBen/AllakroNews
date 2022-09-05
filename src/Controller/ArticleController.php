@@ -22,7 +22,7 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $data = $articleRepository->findAll();
+        $data = $articleRepository->findByValid();
         $articles = $paginator->paginate($data, $request->query->getInt('page', 1), 6);
         return $this->render('article/index.html.twig', [
             'articles' => $articles,

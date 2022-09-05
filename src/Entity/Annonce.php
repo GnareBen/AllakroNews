@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 /**
@@ -27,9 +28,10 @@ class Annonce
     private ?string $contenu = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Slug(fields: ['titre'])]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
     /**
@@ -71,6 +73,7 @@ class Annonce
 
         return $this;
     }
+
 
     public function getContenu(): ?string
     {
@@ -119,7 +122,7 @@ class Annonce
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 

@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
-
+{% block title %}Tous les articles{% endblock %}
 
 {% block content %}
         <div class="container">
@@ -10,7 +9,7 @@
 
                 {#    bloc d'affiche de tout les article dans un card#}
                 <div class="col-8">
-                    <h1 class="m-5 text-start">Tous les articles</h1>
+                    <h1 class="m-5 text-start text-uppercase">Tous les articles</h1>
 
                     {% for article in articles %}
                     <div class="card mb-3">
@@ -41,12 +40,12 @@
                 </div>
                 {#    bloc d'affiche de tout les article dans un card#}
 
-                {#    bloc d'affiche de commentaire#}
+                {#    bloc d'affiche de pagination#}
                 <div class="d-flex">
                     {% do articles.setPageRange(5) %}
                     {{ knp_pagination_render(articles, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
                 </div>
-                {#    bloc d'affiche de commentaire#}
+                {#    bloc d'affiche de pagination#}
 
                 {#    bloc d'affiche de commentaire#}
                 <div class="col-4">

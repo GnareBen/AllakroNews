@@ -40,13 +40,29 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findByValid(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.is_valid = true')
+            ->andWhere('u.is_published = true')
+            ->orderBy('u.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
      * @return Article[] Returns an array size 6 of Article objects
      */
     public function findBySix(): array
     {
         return $this->createQueryBuilder('a')
-            ->orderBy('a.id', 'DESC')
-            ->setMaxResults(6)
+            ->orderBy('a.created_at', 'DESC')
+            ->andWhere('a.is_valid = true')
+            ->andWhere('a.is_published = true')
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult()
         ;
@@ -56,6 +72,8 @@ class ArticleRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->orderBy('a.id', 'DESC')
+            ->andWhere('a.is_valid = true')
+            ->andWhere('a.is_published = true')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult()
@@ -75,21 +93,6 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getQuery()
 //            ->getResult()
 //            ;
-//    }
-
-//        /**
-//     * @return Article[] Returns an array of User objects
-//     */
-//    public function findByName($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.Titre = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
 //    }
 
 

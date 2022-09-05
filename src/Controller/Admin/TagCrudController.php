@@ -19,7 +19,7 @@ class TagCrudController extends AbstractCrudController
     {
         return parent::configureActions($actions)
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action){
-                return $action->setIcon("fa fa-trash")->setCssClass("btn btn-danger");
+                return $action->setIcon("fa fa-trash")->setCssClass("btn btn-danger text-white");
             })
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action){
                 return $action->setIcon("fa fa-edit")->setCssClass("btn btn-secondary");

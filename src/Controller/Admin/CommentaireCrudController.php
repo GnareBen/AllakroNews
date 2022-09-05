@@ -38,7 +38,7 @@ class CommentaireCrudController extends AbstractCrudController
         return parent::configureActions($actions)
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action){
-                return $action->setIcon("fa fa-trash")->setCssClass("btn btn-danger");
+                return $action->setIcon("fa fa-trash")->addCssClass("btn btn-danger text-white");
             })
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action){
                 return $action->setIcon("fa fa-eye")->setCssClass("btn btn-primary");

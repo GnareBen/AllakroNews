@@ -1,55 +1,41 @@
-{% extends 'base.html.twig' %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    <title>Lire une annonces</title>
+</head>
+<body>
 
-{% block title %}Annonce{% endblock %}
-{% block carousel%}{% endblock %}
+    <div class="container">
 
-{% block content %}
-    <h1>Annonce</h1>
+        <h1 class="mt-5 text-uppercase fw-bold">{{ annonce.titre }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ annonce.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ annonce.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ annonce.slug }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ annonce.image }}</td>
-            </tr>
-            <tr>
-                <th>Is_published</th>
-                <td>{{ annonce.isPublished ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Is_valid</th>
-                <td>{{ annonce.isValid ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{{ annonce.updatedAt ? annonce.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="">
+                <img src="{{ vich_uploader_asset(annonce, 'imageFile') }}" alt="" class="img-fluid float-start me-4">
+                <p>{{ annonce.contenu | striptags}}</p>
+                <p class="mt-4">L'article a publié ? {{ annonce.isPublished ? 'Oui' : 'Non' }}</p>
+                <p class="mt-4">Date de création de l'article :  {{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+                <p class="mt-4">Date de Modification de l'article : {{ annonce.updatedAt ? "L'annonce n'a pas été modifié" }}</p>
+            </div>
 
-    <a href="{{ path('app_annonce_index') }}">back to list</a>
+            <div class="">
 
-    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
+                <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }} " class="btn btn-warning">Modifier l'annonce</a>
 
-    {{ include('annonce/_delete_form.html.twig') }}
-{% endblock %}
+                <a href="{{ path('app_annonce_index') }}" class="btn btn-success">Retour sur mon profile</a>
+
+                <form method="post" action="{{ path('app_annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');" class="mt-5">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+
+    </div>
+
+</body>
+</html>

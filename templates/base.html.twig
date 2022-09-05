@@ -6,21 +6,15 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+        {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </head>
     <body>
-
     {#    bloc d'affiche de navbar#}
     {% block navbar %}
         <nav class="navbar navbar-expand-lg bg-light sticky-top mb-0">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path("app_home") }}">
+                <a class="navbar-brand" href="{{ path("app_article_index") }}">
                     <img src="{{ asset("Images/App/Logo/logo.jpg") }}" alt="" class="rounded-circle d-inline-block align-text-center" width="60" height="54">
                     Allakro News
                 </a>
@@ -30,8 +24,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ path("app_home") }}">Accceuil</a>
+                                <a class="nav-link" href="{{ path("app_home") }}">Accueil</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path("app_article_index") }}">Articles</a>
                             </li>
@@ -41,11 +36,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_home") }}">Informations utiles</a>
+                                <a class="nav-link" href="{{ path("app_information") }}">Informations utiles</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path("app_home") }}">Nous contacter</a>
+                                <a class="nav-link" href="{{ path("app_contact") }}">Nous contacter</a>
                             </li>
                         </ul>
 
@@ -68,15 +63,14 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {% if app.user %}
-                                    <img src="{{ vich_uploader_asset(app.user, 'imageFile') }}" class="rounded-circle" height="40" alt="" loading="lazy" />
+                                    <img src="{{ app.user.image ? vich_uploader_asset(app.user, 'imageFile') : asset('Images/App/Avatars/man.png')}}" class="rounded-circle" height="40" alt="" loading="lazy" />
                                     {% else %}
                                         <img src="{{ asset('Images/App/Avatars/man.png') }}" class="rounded-circle" height="40" alt="" loading="lazy" />
                                 {% endif %}
                                 {{ app.user.username }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ path('app_user_show', {'id': app.user.id}) }}">Mes Information</a></li>
-                                <li><a class="dropdown-item" href="#">Mes annonces</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_user_show', {'id': app.user.id}) }}">Tableau de bord</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>
@@ -160,24 +154,24 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-md-12 mb-2 mb-md-0">
-                        <h5 class="text-uppercase">Footer Content</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est atque cumque eum delectus sint!</p>
+                        <h5 class="text-uppercase">Information</h5>
+                        <p>Ce site à été mis en lace dans le cadre d'un projet de fin d'etude. Les données presentes sur l'application sont des données fictives utilisées pour des fins pédagogiques</p>
                     </div>
 
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                         <h5 class="text-uppercase mb-0">ALAKRO</h5>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!" class="text-white">Link 1</a>
+                                <a href="{{ path('app_home') }}" class="text-white">Accueil</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Link 2</a>
+                                <a href="{{ path('app_article_index') }}" class="text-white">Articles</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Link 3</a>
+                                <a href="{{ path('app_article_index') }}" class="text-white">Annonces</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Link 4</a>
+                                <a href="{{ path('app_information') }}" class="text-white">Informations utiles</a>
                             </li>
                         </ul>
                     </div>
@@ -186,16 +180,16 @@
                         <h5 class="text-uppercase mb-0">UVCI</h5>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#!" class="text-white">Link 1</a>
+                                <a href="https://www.uvci.edu.ci/portail/Main/index/fr" target="_blank" class="text-white">Portail</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Link 2</a>
+                                <a href="http://scolarite.uvci.edu.ci/" target="_blank" class="text-white">Scolarité</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Link 3</a>
+                                <a href="http://campus.uvci.edu.ci/" target="_blank" class="text-white">Campus</a>
                             </li>
                             <li>
-                                <a href="#!" class="text-white">Link 4</a>
+                                <a href="http://www.bourses.enseignement.gouv.ci/" target="_blank" class="text-white">Demande de bourse</a>
                             </li>
                         </ul>
                     </div>
@@ -210,37 +204,6 @@
 
                     <div class="col-12">
 
-                        <section class="">
-
-                            <form action="">
-
-                                <div class="row d-flex justify-content-center">
-
-                                    <div class="col-auto">
-                                        <p class="pt-2">
-                                            <strong>Sign up for our newsletter</strong>
-                                        </p>
-                                    </div>
-
-                                    <div class="col-md-5 col-12">
-                                        <div class="form">
-                                            <div class="form-outline mb-4">
-                                                <input type="email" id="form5Example27" class="form-control" placeholder="Entrez votre addresse email" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary mb-4">
-                                            Subscribe
-                                        </button>
-                                    </div>
-
-                                </div>
-
-                            </form>
-
-                        </section>
 
                     </div>
 
@@ -249,7 +212,7 @@
             </div>
 
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                Copyright © {{ 'now' | date('Y')}} Village d'Allakro
+                Copyright © {{ 'now' | date('Y')}} quartier Allakro
             </div>
 
         </footer>

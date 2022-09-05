@@ -39,20 +39,34 @@ class AnnonceRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Annonce[] Returns an array of Annonce objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Annonce[] Returns an array of Article objects
+     */
+    public function findByValid(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.is_valid = true')
+            ->andWhere('u.is_published = true')
+            ->orderBy('u.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Annonce[] Returns an array of Annonce objects
+     */
+    public function findBySix(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.is_valid = true')
+            ->andWhere('a.is_published = true')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Annonce
 //    {

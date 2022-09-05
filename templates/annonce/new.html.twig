@@ -5,43 +5,39 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
-    <title>Document</title>
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    <title>Publier une annonces</title>
 </head>
 <body>
 
-<div class="container vh-100 d-flex justify-content-center align-items-center h-100">
-    <div class="col-8">
-        <h1>Créer une Annonce</h1>
+    <div class="container col-8 vh-100 d-flex flex-column justify-content-center align-items-center ">
+            <h1 class="text-uppercase">Créer une Annonce</h1>
 
-        <div class="container">
+            <div class="container">
+                {{ form_start(form) }}
 
-            {{ form_start(form) }}
-
-            <div class="row g-3">
-                {{ form_row(form.titre) }}
-                {{ form_row(form.contenu) }}
-            </div>
-
-            <div class="row g-3 mt-5">
-                {{ form_row(form.imageName) }}
-                <div class="col mt-3 mb-4">
-                    <button class="btn btn-primary" type="submit">Créer</button>
+                <div class="row g-3">
+                    {{ form_row(form.titre) }}
+                    {{ form_row(form.imageName) }}
                 </div>
+
+                <div class="row">
+                    {{ form_row(form.contenu) }}
+                </div>
+
+                <div class="col-6 mt-3 mb-4">
+                    <button class="btn btn-primary" type="submit">Créer l'annonce</button>
+                </div>
+
+                {{ form_end(form) }}
             </div>
-            {{ form_end(form) }}
-        </div>
-        <div class="container mt-5">
-            <a href="{{ path('app_annonce_index') }}" class="btn btn-primary">Retour au listing</a>
-        </div>
+
+
+            <div class="container mt-5">
+                <a href="{{ path('app_annonce_index') }}" class="btn btn-primary">Retour au listing</a>
+            </div>
     </div>
-</div>
 
 </body>
 </html>

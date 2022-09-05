@@ -1,20 +1,49 @@
-{% extends 'base.html.twig' %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    <title>Document</title>
+</head>
+<body>
 
-{% block title %}Modifier annonce{% endblock %}
-{% block carousel %}{% endblock %}
-
-{% block content %}
-    <h1>Modification de l'annonce</h1>
+<div class="container col-8 vh-100 d-flex flex-column justify-content-center align-items-center ">
+    <h1 class="text-uppercase">Modifier une Annonce</h1>
 
     <div class="container">
+        {{ form_start(form) }}
 
-        <div class="col-8 mt-4">
-            {{ include('annonce/_form.html.twig', {'button_label': 'Modifier'}) }}
+        <div class="row g-3">
+            {{ form_row(form.titre) }}
+            {{ form_row(form.imageName) }}
         </div>
 
+        <div class="row">
+            {{ form_row(form.contenu) }}
+        </div>
+
+        <div class="col-6 mt-3 ">
+            <button class="btn btn-primary me-3" type="submit">Modifier l'annonce</button>
+        </div>
+        {{ form_end(form) }}
     </div>
 
-    <a href="{{ path('app_annonce_index') }}">Retour au listing</a>
+    <div class="container text-center mt-3 mb-4 d-inline-flex justify-content-center">
 
-    {{ include('annonce/_delete_form.html.twig') }}
-{% endblock %}
+        <a href="{{ path('app_user_show', {'id': annonce.user.id}) }}" class="btn btn-info me-4">Retour sur mon profile</a>
+
+        <form method="post" action="{{ path('app_annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+            <button class="btn btn-danger">Supprimer l'annonce</button>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
+

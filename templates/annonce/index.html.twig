@@ -4,47 +4,36 @@
 {% block carousel%}{% endblock %}
 
 {% block content%}
-    <h1>Annonce index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Slug</th>
-                <th>Image</th>
-                <th>Is_published</th>
-                <th>Is_valid</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+        <h1 class="fw-bold text-uppercase my-4">Toutes les annonces</h1>
+
         {% for annonce in annonces %}
-            <tr>
-                <td>{{ annonce.id }}</td>
-                <td>{{ annonce.titre }}</td>
-                <td>{{ annonce.contenu }}</td>
-                <td>{{ annonce.slug }}</td>
-                <td>{{ annonce.image }}</td>
-                <td>{{ annonce.isPublished ? 'Yes' : 'No' }}</td>
-                <td>{{ annonce.isValid ? 'Yes' : 'No' }}</td>
-                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ annonce.updatedAt ? annonce.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_annonce_new') }}">Create new</a>
+            <div class="card mb-3" style="max-width: 1080px;">
+                <div class="row g-0">
+                    <div class="col-md-4" style="max-width: 720px;">
+                        <img src="{{ vich_uploader_asset(annonce, 'imageFile') }}" class="img-fluid rounded-start h-100" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ annonce.titre }}</h5>
+                            <p class="card-text">{{ annonce.contenu | striptags | u.truncate(600, '...', false)}}</p>
+                            <p class="card-text fw-bold">Contact : 0749959980.</p>
+                            <p class="card-text text-end"><small class="text-muted"> Publiée le {{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {%endfor %}
+
+        {#    bloc d'affiche de pagination#}
+        <div class="d-flex">
+            {% do annonces.setPageRange(5) %}
+            {{ knp_pagination_render(annonces, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+        </div>
+        {#    bloc d'affiche de pagination#}
+    </div>
+
 {% endblock %}

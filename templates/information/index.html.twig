@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informations utiles{% endblock %}
+{% block carousel%}{% endblock %}
+
+{% block content%}
+
+    <div class="container">
+        <h1 class="fw-bold text-uppercase my-4">Informations utiles</h1>
+
+        <div class="">
+            <h1>Pharmacies disponibles dans le quartier ou aux environs</h1>
+                <table class="table table-responsive table-hover table-bordered table-striped mt-3">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Est de garde</th>
+                        <th scope="col">Contact</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pharmacie in pharmacies %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ pharmacie.nom }}</td>
+                        <td><img src="{{ asset('uploads/images/pharmacies/' ~ pharmacie.image) }}" height="50" alt=""></td>
+                        <td>{{ pharmacie.deGarde ? 'Oui' : 'Non' }}</td>
+                        <td>{{ pharmacie.contact }}</td>
+                    </tr>
+                    {%endfor %}
+                    </tbody>
+                </table>
+
+        </div>
+
+        <div class="mt-5">
+            <h1>Pharmacies centres de santé dans le quartier ou aux environs</h1>
+            <table class="table table-responsive table-hover table-bordered table-striped mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Contact</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for dispensaire in dispensaires %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ dispensaire.nom }}</td>
+                        <td><img src="{{ asset('uploads/images/dispensaires/' ~ dispensaire.image) }}" height="50" alt=""></td>
+                        <td>{{ dispensaire.numero }}</td>
+                    </tr>
+                {%endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="mt-5 mb-4">
+            <a href="{{ path('app_home') }}" class="btn btn-primary">Retourner à l'accueil</a>
+        </div>
+
+    </div>
+
+{% endblock %}
