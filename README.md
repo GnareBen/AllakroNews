@@ -8,8 +8,9 @@
 1 : Importer la base de donnée allakro news fournie avec le code source
 2 : Se rendre dans le dossier du projet
 3 : Lancer la commande "composer install" dans le terminal
-4 : Lancer la commande "npm run dev" dans le terminal
-5 : Lancer votre serveur
+4 : Lancer la commande "npm install" dans le terminal
+5 : Lancer la commande "npm run dev" dans le terminal
+6 : Lancer votre serveur
 
 # LES DIFFERENTES ROUTES
 1 : "/" Accueil du site
