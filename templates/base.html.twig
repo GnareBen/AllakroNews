@@ -10,11 +10,11 @@
         {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </head>
     <body>
-    {#    bloc d'affiche de navbar#}
+    {# bloc d'affiche de navbar #}
     {% block navbar %}
         <nav class="navbar navbar-expand-lg bg-light sticky-top mb-0">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path("app_article_index") }}">
+                <a class="navbar-brand" href="{{ path("app_home") }}">
                     <img src="{{ asset("Images/App/Logo/logo.jpg") }}" alt="" class="rounded-circle d-inline-block align-text-center" width="60" height="54">
                     Allakro News
                 </a>
@@ -85,9 +85,9 @@
             </div>
         </nav>
     {% endblock %}
-    {#    bloc d'affiche de navbar#}
+    {# bloc d'affiche de navbar #}
 
-    {#    bloc d'affiche de carousel#}
+    {# bloc d'affiche de carousel #}
     {% block carousel %}
         <header class="mt-0">
             <div id="myCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -99,33 +99,12 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-intervaal="3000">
                         <img src="{{ asset("Images/App/Carousel/Image3.jpg") | imagine_filter('carousel') }}" class="d-block w-100 img-fluid" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
-                                <div class="col mb-4">
-                                    <a href="" class="btn btn-primary">En savoir plus</a>
-                                </div>
-                        </div>
                     </div>
                     <div class="carousel-item" data-bs-intervaal="3000">
                         <img src="{{ asset("Images/App/Carousel/Image2.jpg") | imagine_filter('carousel') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                            <div class="col mb-4">
-                                <a href="" class="btn btn-primary">En savoir plus</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="carousel-item" data-bs-intervaal="3000">
                         <img src="{{ asset("Images/App/Carousel/Image1.jpg") | imagine_filter('carousel') }}" class="d-block w-100" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                            <div class="col mb-4">
-                                <a href="" class="btn btn-primary">En savoir plus</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -139,13 +118,13 @@
             </div>
         </header>
     {% endblock %}
-    {#    bloc d'affiche de carousel#}
+    {# bloc d'affiche de carousel #}
 
-    {#    bloc d'affiche de content#}
+    {# bloc d'affiche de content #}
     {% block content %}{% endblock %}
-    {#    bloc d'affiche de content#}
+    {# bloc d'affiche de content #}
 
-    {#    bloc d'affiche de footer#}
+    {# bloc d'affiche de footer #}
     {% block footer %}
         <footer class="bg-secondary text-white text-center">
 
@@ -212,11 +191,11 @@
             </div>
 
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                Copyright © {{ 'now' | date('Y')}} quartier Allakro
+                Copyright © {{ 'now' | date('Y')}} Quartier Allakro
             </div>
 
         </footer>
     {% endblock %}
-    {#    bloc d'affiche de footer#}
+    {# bloc d'affiche de footer #}
     </body>
 </html>

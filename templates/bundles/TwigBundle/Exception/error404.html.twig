@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    <title>erreur - page introuvable</title>
+</head>
+<body>
+
+    <div class="d-flex justify-content-center text-center mt-4">
+        <img src="{{ asset('Images/App/Errors/404.jpg') }}" alt="" class="img-fluid d-block" style="max-width: 900px;">
+    </div>
+
+    <div class="container text-center mt-4">
+
+        <a href="{{ path('app_home') }}" class="btn btn-outline-primary">Retourner à l'accueil</a>
+
+    </div>
+
+
+</body>
+</html>

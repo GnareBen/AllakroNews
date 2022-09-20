@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Tous les articles{% endblock %}
+{% block carousel %}{% endblock %}
 
 {% block content %}
         <div class="container">
@@ -9,7 +10,7 @@
 
                 {#    bloc d'affiche de tout les article dans un card#}
                 <div class="col-8">
-                    <h1 class="m-5 text-start text-uppercase">Tous les articles</h1>
+                    <h1 class="m-5 text-center text-uppercase">Tous les articles</h1>
 
                     {% for article in articles %}
                     <div class="card mb-3">
