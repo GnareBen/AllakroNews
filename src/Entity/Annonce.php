@@ -22,9 +22,11 @@ class Annonce
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 5, max: 15)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 100, max: 400)]
     private ?string $contenu = null;
 
     #[ORM\Column(length: 255)]

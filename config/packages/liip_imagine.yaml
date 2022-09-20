@@ -8,19 +8,19 @@ liip_imagine:
         card_thumb:
             quality: 75
             filters:
-                thumbnail: {size: [800, 330], mode: outbound}
+                thumbnail: {size: [900, 600], mode: outbound}
 
         post:
-            quality: 75
+            quality: 95
             filters:
                 scale: {dim: [1200, 1200], mode: outbound}
 
         carousel:
             quality: 95
             filters:
-                scale: { dim: [ 1600, 1600 ], mode: outbound }
+                scale: { dim: [ 1900, 1900 ], mode: outbound }
 
         user_profile:
             quality: 75
             filters:
-                thumbnail: {size: [60, 60], mode: outbound}
+                thumbnail: {size: [80, 80], mode: outbound}

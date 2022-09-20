@@ -24,7 +24,7 @@
                                 <div class="card-body pb-1 pt-1">
                                     <h5 class="card-title">{{ article.titre }}</h5>
                                     <h6 class="card-subtitle text-muted">{{ article.user }}</h6>
-                                    <p class="card-text mt-3">{{ article.contenu | striptags | u.truncate(200, '...', false) }}</p>
+                                    <p class="card-text mt-3">{{ article.contenu | striptags | u.truncate(150, '...', false) }}</p>
                                     <div class="row align-items-end">
                                         <div class="col-4">
                                             <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary">Lire Plus</a>
